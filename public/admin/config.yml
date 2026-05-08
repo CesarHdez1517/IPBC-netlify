@@ -1,0 +1,30 @@
+backend:
+  name: github
+  repo: CesarHdez1517/IPBC-netlify.git
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "articulos"
+    label: "Artículos"
+    folder: "content/articulos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título",   name: "title",     widget: "string" }
+      - { label: "Resumen",  name: "excerpt",   widget: "text" }
+      - { label: "Imagen",   name: "imageUrl",  widget: "image",  required: false }
+      - { label: "Fecha",    name: "createdAt", widget: "datetime" }
+      - { label: "Contenido",name: "content",   widget: "markdown" }
+
+  - name: "videos"
+    label: "Videos"
+    folder: "content/videos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título",      name: "title",       widget: "string" }
+      - { label: "ID YouTube",  name: "youtubeId",   widget: "string" }
+      - { label: "Descripción", name: "description", widget: "text", required: false }
