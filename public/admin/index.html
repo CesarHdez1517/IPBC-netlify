@@ -4,11 +4,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel de Administración | IPBC</title>
+
+    <!-- Cargamos Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
+<!-- Esperamos a que cargue el script -->
 <script>
-    CMS.init();
+    window.addEventListener('load', function() {
+        if (typeof CMS !== 'undefined') {
+            CMS.init();
+        } else {
+            console.error("Decap CMS no se cargó correctamente");
+        }
+    });
 </script>
 </body>
 </html>
