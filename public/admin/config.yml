@@ -2,29 +2,81 @@ backend:
   name: github
   repo: CesarHdez1517/IPBC-netlify
   branch: main
+  # auth_scope: repo   # descomenta si usas repositorio privado
 
 media_folder: "public/images"
 public_folder: "/images"
 
+# CORRECCIÓN: Los artículos y videos se guardan como JSON en src/content/
+# (NO en src/data/ que es código TypeScript).
+# Vite los lee en build-time con import.meta.glob.
+# Cada vez que guardas en el CMS → GitHub commit → Netlify rebuild automático.
+
 collections:
+  # ── Artículos ──────────────────────────────────────────────────────────────
   - name: "articulos"
     label: "Artículos"
-    folder: "src/data/articulos"
+    label_singular: "Artículo"
+    folder: "src/content/articulos"
     create: true
-    slug: "{{slug}}"
+    delete: true
+    slug: "{{slug}}"     # nombre de archivo = slug del artículo
+    format: "json"       # guarda como .json (fácil de leer con import.meta.glob)
+    summary: "{{title}} — {{createdAt}}"
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Resumen", name: "excerpt", widget: "text" }
-      - { label: "Imagen", name: "imageUrl", widget: "image", required: false }
-      - { label: "Fecha", name: "createdAt", widget: "datetime" }
-      - { label: "Contenido", name: "content", widget: "markdown" }
+      - label: "Título"
+        name: "title"
+        widget: "string"
+        hint: "Título del artículo (aparece en la tarjeta y en la página)"
 
+      - label: "Resumen"
+        name: "excerpt"
+        widget: "text"
+        hint: "1–2 oraciones. Aparece en la tarjeta de la lista de artículos"
+
+      - label: "Fecha de publicación"
+        name: "createdAt"
+        widget: "datetime"
+        format: "YYYY-MM-DDTHH:mm:ssZ"
+        default: ""
+
+      - label: "Imagen destacada"
+        name: "imageUrl"
+        widget: "image"
+        required: false
+        hint: "Opcional. Aparece en la tarjeta y en la cabecera del artículo"
+
+      - label: "Contenido"
+        name: "content"
+        widget: "markdown"
+        hint: "Usa ## para subtítulos, **negrita**, > para citas bíblicas"
+
+  # ── Videos ─────────────────────────────────────────────────────────────────
   - name: "videos"
     label: "Videos"
-    folder: "src/data/videos"
+    label_singular: "Video"
+    folder: "src/content/videos"
     create: true
+    delete: true
     slug: "{{slug}}"
+    format: "json"
+    summary: "{{title}}"
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "ID YouTube", name: "youtubeId", widget: "string" }
-      - { label: "Descripción", name: "description", widget: "text", required: false }
+      - label: "Título"
+        name: "title"
+        widget: "string"
+        hint: "Título del sermón o enseñanza"
+
+      - label: "ID de YouTube"
+        name: "youtubeId"
+        widget: "string"
+        hint: "Solo el ID, no la URL completa. Ej: dQw4w9WgXcQ (de ?v=dQw4w9WgXcQ)"
+        pattern:
+          - '^[a-zA-Z0-9_-]{11}$'
+          - "Debe ser exactamente el ID de YouTube (11 caracteres)"
+
+      - label: "Descripción"
+        name: "description"
+        widget: "text"
+        required: false
+        hint: "Breve descripción del video (opcional)"
