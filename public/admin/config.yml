@@ -1,6 +1,7 @@
 backend:
   name: github
   repo: CesarHdez1517/IPBC-netlify
+  public_repo: true
   branch: main
   # auth_scope: repo   # descomenta si usas repositorio privado
 
