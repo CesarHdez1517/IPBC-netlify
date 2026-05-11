@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 
 const VALORES = [
   { titulo: "Fidelidad Bíblica",     desc: "Enseñamos y vivimos de acuerdo con la Palabra de Dios sin compromisos." },
@@ -13,17 +14,12 @@ const ARCO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663585857688/97Xf8M9F7
 export default function QuienesSomos() {
   return (
     <PageLayout>
-      {/* Hero con imagen */}
-      <section className="relative h-72 md:h-96 overflow-hidden" aria-label="Encabezado">
-        <img src={ARCO} alt="Exterior de la Iglesia Presbiteriana Bíblica en Cuba"
-          className="absolute inset-0 w-full h-full object-cover"
-          fetchPriority="high" decoding="async" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/15" aria-hidden />
-        <div className="relative container h-full flex flex-col justify-end pb-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-white">Quiénes Somos</h1>
-          <p className="text-lg text-white/90 mt-2">Conoce nuestra historia y misión</p>
-        </div>
-      </section>
+      <PageHero
+        title="Quiénes Somos"
+        subtitle="Conoce nuestra historia y misión"
+        backgroundImage={ARCO}
+        imageAlt="Exterior de la Iglesia Presbiteriana Bíblica en Cuba"
+      />
 
       <section className="py-16 bg-background">
         <div className="container max-w-4xl space-y-14">

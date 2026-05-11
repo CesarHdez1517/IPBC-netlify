@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Clock, Send, CheckCircle } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 
 /* ── env vars — añade estos en .env (ver .env.example) ────────────────────── */
 const SVC  = import.meta.env.VITE_EMAILJS_SERVICE_ID  ?? "";
@@ -84,12 +85,10 @@ export default function Contacto() {
 
   return (
     <PageLayout>
-      <section className="bg-primary text-primary-foreground py-14" aria-labelledby="cont-h">
-        <div className="container">
-          <h1 id="cont-h" className="text-4xl md:text-5xl font-bold mb-3">Contacto</h1>
-          <p className="text-lg md:text-xl opacity-90">Nos encantaría escucharte</p>
-        </div>
-      </section>
+      <PageHero
+        title="Contacto"
+        subtitle="Nos encantaría escucharte"
+      />
 
       <section className="py-16 bg-background">
         <div className="container max-w-5xl">

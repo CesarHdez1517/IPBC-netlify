@@ -2,6 +2,7 @@ import { Heart, DollarSign, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import PayPalDonateButton from "@/components/PayPalDonateButton";
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 
 const OPTIONS = [
   { id: "s", amount: 10, label: "Donación básica",    benefits: ["Apoyo a programas locales"] as const },
@@ -27,13 +28,10 @@ export default function Tienda() {
 
   return (
     <PageLayout>
-      {/* Hero */}
-      <section className="bg-primary text-primary-foreground py-14" aria-labelledby="tienda-h">
-        <div className="container">
-          <h1 id="tienda-h" className="text-4xl md:text-5xl font-bold mb-3">Apoya Nuestro Ministerio</h1>
-          <p className="text-lg md:text-xl opacity-90">Tu generosidad nos ayuda a continuar proclamando el evangelio en Cuba</p>
-        </div>
-      </section>
+      <PageHero
+        title="Apoya Nuestro Ministerio"
+        subtitle="Tu generosidad nos ayuda a continuar proclamando el evangelio en Cuba"
+      />
 
       <section className="py-16 bg-background" aria-labelledby="don-h">
         <div className="container max-w-5xl">
@@ -54,8 +52,8 @@ export default function Tienda() {
                 return (
                   <li key={o.id}>
                     <button type="button" onClick={() => pick(o.id)} aria-pressed={sel}
-                      className={`w-full text-left card-elegant p-7 transition-all focus-visible:ring-2 focus-visible:ring-accent
-                        ${sel ? "ring-2 ring-accent shadow-lg scale-[1.02]" : "hover:shadow-lg hover:scale-[1.01]"}`}>
+                      className={`w-full text-left transition-all focus-visible:ring-2 focus-visible:ring-accent
+                        ${sel ? "card-donation ring-2 ring-accent shadow-xl scale-[1.02]" : "card-donation hover:shadow-lg hover:scale-[1.01]"}`}>
                       <div className="text-center mb-5">
                         <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent/10 mb-3" aria-hidden>
                           <DollarSign size={28} className="text-accent" />

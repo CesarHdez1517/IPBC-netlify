@@ -1,4 +1,5 @@
 import PageLayout from "@/components/PageLayout";
+import PageHero from "@/components/PageHero";
 
 const CRUZ = "https://d2xsxph8kpxj0f.cloudfront.net/310519663585857688/97Xf8M9F7MaacVrYT5fdRX/cruz-simbolo-nffZVtT6eokgd7UFZBHGFP.webp";
 
@@ -21,17 +22,12 @@ const ADICIONALES = [
 export default function QueCreemos() {
   return (
     <PageLayout>
-      {/* Hero */}
-      <section className="relative h-72 md:h-96 overflow-hidden" aria-label="Encabezado">
-        <img src={CRUZ} alt="Cruz de madera — símbolo de nuestra fe"
-          className="absolute inset-0 w-full h-full object-cover"
-          fetchPriority="high" decoding="async" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/40 to-black/15" aria-hidden />
-        <div className="relative container h-full flex flex-col justify-end pb-10">
-          <h1 className="text-4xl md:text-5xl font-bold text-white">Qué Creemos</h1>
-          <p className="text-lg text-white/90 mt-2">Nuestras doctrinas fundamentales</p>
-        </div>
-      </section>
+      <PageHero
+        title="Qué Creemos"
+        subtitle="Nuestras doctrinas fundamentales"
+        backgroundImage={CRUZ}
+        imageAlt="Cruz de madera — símbolo de nuestra fe"
+      />
 
       <section className="py-16 bg-background">
         <div className="container max-w-4xl">
@@ -47,7 +43,7 @@ export default function QueCreemos() {
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-14 list-none m-0 p-0" role="list">
             {DOCTRINAS.map(({ titulo, desc }) => (
-              <li key={titulo} className="card-elegant p-6 h-full">
+              <li key={titulo} className="card-doctrine p-6 h-full">
                 <h3 className="text-lg font-bold text-primary mb-2">{titulo}</h3>
                 <p className="text-foreground text-sm leading-relaxed">{desc}</p>
               </li>

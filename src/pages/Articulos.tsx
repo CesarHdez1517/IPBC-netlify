@@ -3,6 +3,7 @@ import { Calendar, Search as SearchIcon } from "lucide-react";
 import { useState, useMemo } from "react";
 import { ARTICLES, searchArticles } from "@/data/articles";
 import PageLayout from "@/components/PageLayout";
+import PageHero  from "@/components/PageHero";
 import SearchBar  from "@/components/SearchBar";
 import Pagination from "@/components/Pagination";
 
@@ -24,12 +25,10 @@ export default function Articulos() {
 
   return (
     <PageLayout>
-      <section className="bg-primary text-primary-foreground py-14" aria-labelledby="art-h">
-        <div className="container">
-          <h1 id="art-h" className="text-4xl md:text-5xl font-bold mb-3">Artículos Bíblicos</h1>
-          <p className="text-lg md:text-xl opacity-90">Reflexiones y enseñanzas de la Palabra de Dios</p>
-        </div>
-      </section>
+      <PageHero
+        title="Artículos Bíblicos"
+        subtitle="Reflexiones y enseñanzas de la Palabra de Dios"
+      />
 
       <div className="bg-card py-8 border-b border-border">
         <div className="container max-w-2xl">
@@ -47,12 +46,13 @@ export default function Articulos() {
           {paginated.length > 0 ? (
             <>
               <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 list-none m-0 p-0" role="list">
-                {paginated.map((article) => {
+                {paginated.map((article, index) => {
                   const date = new Date(article.createdAt);
+                  const isFirst = index === 0 && currentPage === 0;
                   return (
                     <li key={article.id}>
                       <Link to={`/articulos/${article.slug}`}
-                        className="card-elegant p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all h-full flex flex-col block">
+                        className={`${isFirst ? "card-featured" : "card-elegant"} p-6 h-full flex flex-col block`}>
                         {article.imageUrl && (
                           <img src={article.imageUrl} alt="" aria-hidden
                             className="w-full h-48 object-cover rounded-md mb-4" loading="lazy" decoding="async" />

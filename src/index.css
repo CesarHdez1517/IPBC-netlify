@@ -27,40 +27,40 @@
   --color-ring: var(--ring);
 }
 
-/* ── Tokens ── */
+/* ── Design Tokens ────────────────────────────────────────────────────────── */
 :root {
   --radius: 0.65rem;
-  --primary: #1a3a52;
+  --primary:            #1a3a52;
   --primary-foreground: #f9f7f4;
-  --secondary: #d4af37;
+  --secondary:          #d4af37;
   --secondary-foreground: #1a3a52;
-  --accent: #d4af37;
-  --accent-foreground: #1a3a52;
-  --background: #f9f7f4;
-  --foreground: #2c2c2c;
-  --card: #ffffff;
-  --card-foreground: #2c2c2c;
-  --muted: #e8e4de;
-  --muted-foreground: #6b6b6b;
-  --destructive: #dc2626;
+  --accent:             #d4af37;
+  --accent-foreground:  #1a3a52;
+  --background:         #f9f7f4;
+  --foreground:         #2c2c2c;
+  --card:               #ffffff;
+  --card-foreground:    #2c2c2c;
+  --muted:              #e8e4de;
+  --muted-foreground:   #6b6b6b;
+  --destructive:        #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #e0dcd6;
-  --input: #ffffff;
-  --ring: #d4af37;
+  --border:             #e0dcd6;
+  --input:              #ffffff;
+  --ring:               #d4af37;
 }
 
 .dark {
-  --background: #111820;
-  --foreground: #e8e4de;
-  --card: #1c2730;
-  --card-foreground: #e8e4de;
-  --muted: #263340;
+  --background:       #111820;
+  --foreground:       #e8e4de;
+  --card:             #1c2730;
+  --card-foreground:  #e8e4de;
+  --muted:            #263340;
   --muted-foreground: #9aa5b0;
-  --border: #2a3a48;
-  --input: #1c2730;
+  --border:           #2a3a48;
+  --input:            #1c2730;
 }
 
-/* ── Base ── */
+/* ── Base ─────────────────────────────────────────────────────────────────── */
 @layer base {
   html { scroll-behavior: smooth; }
 
@@ -92,8 +92,10 @@
   img { max-width: 100%; height: auto; }
 }
 
-/* ── Components ── */
+/* ── Components ───────────────────────────────────────────────────────────── */
 @layer components {
+
+  /* Container */
   .container {
     width: 100%;
     margin-left: auto;
@@ -104,14 +106,76 @@
   @media (min-width: 640px)  { .container { padding-left: 1.5rem; padding-right: 1.5rem; } }
   @media (min-width: 1024px) { .container { padding-left: 2rem; padding-right: 2rem; max-width: 1280px; } }
 
+  /* ── Section spacing utilities ──────────────────────────────────────────── */
+  /* FIX: these were used in Home.tsx, QuienesSomos, QueCreemos but not defined */
+  .section-hero    { @apply py-20 md:py-28; }
+  .section-major   { @apply py-16 md:py-20; }
+  .section-content { @apply py-12 md:py-16; }
+
+  /* ── Typography utilities ───────────────────────────────────────────────── */
+  /* FIX: .lead and .subtitle were used but not defined */
+  .lead     { @apply text-lg md:text-xl text-foreground leading-relaxed max-w-prose; }
+  .subtitle { @apply text-base md:text-lg leading-relaxed; }
+
+  /* ── Divider ────────────────────────────────────────────────────────────── */
   .divider-gold {
     @apply h-px bg-gradient-to-r from-transparent via-accent to-transparent;
   }
 
-  .card-elegant {
-    @apply bg-card text-card-foreground rounded-lg shadow-md hover:shadow-lg transition-all duration-300;
+  /* ── Overlays ───────────────────────────────────────────────────────────── */
+  /* FIX: .overlay-dark and .overlay-darker were used in Home.tsx / PageHero but not defined */
+  .overlay-dark {
+    @apply absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/15;
+  }
+  .overlay-darker {
+    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/55 to-black/25;
   }
 
+  /* ── Location badge ─────────────────────────────────────────────────────── */
+  /* FIX: used in Home.tsx hero, was not defined */
+  .location-badge {
+    @apply inline-flex items-center gap-1.5
+           bg-white/15 backdrop-blur-sm
+           text-white text-sm font-medium
+           px-3 py-1.5 rounded-full
+           border border-white/25;
+  }
+
+  /* ── Cards ──────────────────────────────────────────────────────────────── */
+  .card-elegant {
+    @apply bg-card text-card-foreground rounded-lg shadow-md
+           hover:shadow-lg transition-all duration-300;
+  }
+
+  /* FIX: .card-featured — used in Articulos.tsx for the first article, was not defined */
+  .card-featured {
+    @apply bg-card text-card-foreground rounded-lg
+           shadow-xl ring-2 ring-accent/30
+           hover:shadow-2xl hover:ring-accent/50
+           transition-all duration-300;
+  }
+
+  /* FIX: .card-video — used in Videos.tsx, was not defined */
+  .card-video {
+    @apply bg-card text-card-foreground rounded-lg shadow-md overflow-hidden
+           hover:shadow-xl transition-all duration-300;
+  }
+
+  /* FIX: .card-donation — used in Tienda.tsx, was not defined */
+  .card-donation {
+    @apply bg-card text-card-foreground rounded-lg shadow-md p-7 text-left w-full
+           transition-all duration-300;
+  }
+
+  /* FIX: .card-doctrine — used in QueCreemos.tsx, was not defined */
+  .card-doctrine {
+    @apply bg-card text-card-foreground rounded-lg
+           shadow-sm border border-border
+           hover:border-accent/40 hover:shadow-md
+           transition-all duration-300;
+  }
+
+  /* ── Buttons ────────────────────────────────────────────────────────────── */
   .btn-elegant {
     @apply inline-flex items-center justify-center gap-2
            px-6 py-3 bg-primary text-primary-foreground rounded-md
@@ -128,7 +192,7 @@
            focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
   }
 
-  /* Skip-to-content */
+  /* ── Skip-to-content ────────────────────────────────────────────────────── */
   .skip-link {
     position: absolute; width: 1px; height: 1px;
     padding: 0; margin: -1px; overflow: hidden;
@@ -143,35 +207,37 @@
     font-weight: 600; font-size: .875rem; text-decoration: none;
   }
 
-  /* Prose (article body) */
+  /* ── Article prose ──────────────────────────────────────────────────────── */
   .article-prose {
     @apply text-foreground leading-relaxed;
     font-size: 1.125rem;
   }
   .article-prose h2 { @apply text-2xl font-bold text-primary mt-8 mb-4; }
-  .article-prose h3 { @apply text-xl font-bold text-primary mt-6 mb-3; }
+  .article-prose h3 { @apply text-xl  font-bold text-primary mt-6 mb-3; }
   .article-prose p  { @apply mb-5; }
   .article-prose blockquote {
     @apply border-l-4 border-accent pl-5 italic text-muted-foreground my-6;
   }
-  .article-prose ul { @apply list-disc pl-6 mb-5 space-y-1; }
-  .article-prose ol { @apply list-decimal pl-6 mb-5 space-y-1; }
-  .article-prose a  { @apply text-accent hover:underline; }
+  .article-prose ul     { @apply list-disc pl-6 mb-5 space-y-1; }
+  .article-prose ol     { @apply list-decimal pl-6 mb-5 space-y-1; }
+  .article-prose a      { @apply text-accent hover:underline; }
   .article-prose strong { @apply font-bold text-foreground; }
 
-  /* Animaciones de entrada */
-  .fade-in         { animation: fadeIn 0.35s ease-out both; }
+  /* ── Page transitions ───────────────────────────────────────────────────── */
+  .fade-in          { animation: fadeIn 0.35s ease-out both; }
   .mobile-nav-enter { animation: slideDown 0.22s ease-out both; }
 
-  /* Scroll-triggered animations (ver useScrollAnimation) */
-  .anim-fade-up  { opacity: 0; transform: translateY(28px); transition: opacity .55s ease, transform .55s ease; }
+  /* ── Scroll-triggered animations ───────────────────────────────────────── */
+  .anim-fade-up    { opacity: 0; transform: translateY(28px);  transition: opacity .55s ease, transform .55s ease; }
   .anim-fade-left  { opacity: 0; transform: translateX(-32px); transition: opacity .55s ease, transform .55s ease; }
   .anim-fade-right { opacity: 0; transform: translateX(32px);  transition: opacity .55s ease, transform .55s ease; }
-  .anim-scale-up   { opacity: 0; transform: scale(0.9);        transition: opacity .55s ease, transform .55s ease; }
-  .anim-fade-in    { opacity: 0; transition: opacity .55s ease; }
+  .anim-scale-up   { opacity: 0; transform: scale(0.92);       transition: opacity .55s ease, transform .55s ease; }
+  .anim-fade-in    { opacity: 0;                               transition: opacity .55s ease; }
 
-  .anim-fade-up.visible, .anim-fade-left.visible,
-  .anim-fade-right.visible, .anim-scale-up.visible,
+  .anim-fade-up.visible,
+  .anim-fade-left.visible,
+  .anim-fade-right.visible,
+  .anim-scale-up.visible,
   .anim-fade-in.visible {
     opacity: 1; transform: none;
   }
@@ -180,21 +246,34 @@
     opacity: 0; transform: translateY(20px);
     transition: opacity .5s ease, transform .5s ease;
   }
-  .anim-stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0ms; }
-  .anim-stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:80ms; }
+  .anim-stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:  0ms; }
+  .anim-stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay: 80ms; }
   .anim-stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:160ms; }
   .anim-stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:240ms; }
   .anim-stagger.visible > *:nth-child(n+5) { opacity:1; transform:none; transition-delay:320ms; }
 
+  /* Respect user's motion preferences */
   @media (prefers-reduced-motion: reduce) {
-    [class*="anim-"], .anim-stagger > * {
-      transition: none !important; animation: none !important;
-      opacity: 1 !important; transform: none !important;
+    [class*="anim-"], .anim-stagger > *, .fade-in, .mobile-nav-enter {
+      transition: none !important;
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 }
 
-/* ── Keyframes ── */
-@keyframes fadeIn    { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
-@keyframes slideDown { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
-@keyframes heroZoom  { from { transform:scale(1.06); } to { transform:scale(1); } }
+/* ── Keyframes ────────────────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* FIX: heroZoom now uses scale from center — no more top:-10% / h-[120%] hacks */
+@keyframes heroZoom {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1); }
+}

@@ -1,30 +1,16 @@
-[build]
-  command = "npm run build"
-  publish = "dist"
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.tsx";
+import "./index.css";
 
-[build.environment]
-  NODE_VERSION = "20"
+const root = document.getElementById("root");
+if (!root) throw new Error("No se encontró el elemento #root en el DOM.");
 
-# ── Netlify Identity (necesario para que Decap CMS pueda autenticarse) ───────
-# Requiere activar Identity + Git Gateway en el dashboard de Netlify.
-# Ver instrucciones al final del README o en la respuesta del asistente.
-
-# REGLA 1: El panel /admin/ se sirve como archivo estático (no pasa por React Router).
-# Netlify ya prioriza archivos estáticos sobre redirects, pero lo hacemos explícito.
-[[redirects]]
-  from   = "/admin"
-  to     = "/admin/index.html"
-  status = 200
-
-# REGLA 2: Necesario para que Netlify Identity funcione con OAuth de GitHub.
-[[redirects]]
-  from   = "/api/auth"
-  to     = "/.netlify/identity/authorize"
-  status = 302
-
-# REGLA 3: Fallback SPA — React Router maneja todas las demás rutas.
-# Esta regla va AL FINAL para no interceptar /admin/* ni archivos estáticos.
-[[redirects]]
-  from   = "/*"
-  to     = "/index.html"
-  status = 200
+createRoot(root).render(
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
+);

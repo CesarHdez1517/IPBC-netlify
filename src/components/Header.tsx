@@ -38,8 +38,10 @@ export default function Header() {
 
   return (
     <header
-      className={`bg-primary text-primary-foreground sticky top-0 z-40 transition-shadow duration-300 ${
-        isScrolled ? "shadow-xl" : "shadow-lg"
+      className={`text-primary-foreground sticky top-0 z-40 transition-all duration-300 ${
+        isScrolled
+          ? "bg-primary/95 backdrop-blur-md shadow-xl"
+          : "bg-primary shadow-lg"
       }`}
     >
       <div className="container">

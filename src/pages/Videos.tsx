@@ -2,6 +2,7 @@ import { Play, Search as SearchIcon } from "lucide-react";
 import { useState, useMemo } from "react";
 import { VIDEOS, searchVideos } from "@/data/videos";
 import PageLayout  from "@/components/PageLayout";
+import PageHero   from "@/components/PageHero";
 import SearchBar   from "@/components/SearchBar";
 import Pagination  from "@/components/Pagination";
 
@@ -21,13 +22,10 @@ export default function Videos() {
 
   return (
     <PageLayout>
-      {/* Hero */}
-      <section className="bg-primary text-primary-foreground py-14" aria-labelledby="vid-h">
-        <div className="container">
-          <h1 id="vid-h" className="text-4xl md:text-5xl font-bold mb-3">Sermones y Enseñanzas</h1>
-          <p className="text-lg md:text-xl opacity-90">Descubre nuestros videos de predicación y enseñanza bíblica</p>
-        </div>
-      </section>
+      <PageHero
+        title="Sermones y Enseñanzas"
+        subtitle="Descubre nuestros videos de predicación y enseñanza bíblica"
+      />
 
       {/* Search */}
       <div className="bg-card py-8 border-b border-border">
@@ -51,7 +49,7 @@ export default function Videos() {
                   const ytUrl = `https://www.youtube.com/watch?v=${video.youtubeId}`;
                   return (
                     <li key={video.id}>
-                      <article className="card-elegant overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all h-full flex flex-col">
+                      <article className="card-video h-full flex flex-col">
                         {/* Un solo enlace = un solo tab-stop por video */}
                         <a href={ytUrl} target="_blank" rel="noopener noreferrer"
                           className="relative block bg-muted aspect-video group focus-visible:ring-2 focus-visible:ring-accent"
