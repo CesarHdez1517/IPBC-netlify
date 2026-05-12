@@ -1,51 +1,55 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# FIX CRÍTICO: "name: github" requiere una OAuth App de GitHub configurada
+# manualmente — no funciona con Netlify directamente.
+#
+# "name: git-gateway" usa Netlify Identity como autenticación,
+# que es el método estándar para sitios en Netlify. Solo requiere:
+#   1. Activar Identity en el dashboard de Netlify
+#   2. Activar Git Gateway en Identity → Services
+#   3. Invitarte como usuario desde Identity → Invite users
+# ─────────────────────────────────────────────────────────────────────────────
 backend:
-  name: github
-  repo: CesarHdez1517/IPBC-netlify
-  public_repo: true
+  name: git-gateway
   branch: main
-  # auth_scope: repo   # descomenta si usas repositorio privado
 
 media_folder: "public/images"
 public_folder: "/images"
 
-# CORRECCIÓN: Los artículos y videos se guardan como JSON en src/content/
-# (NO en src/data/ que es código TypeScript).
-# Vite los lee en build-time con import.meta.glob.
-# Cada vez que guardas en el CMS → GitHub commit → Netlify rebuild automático.
+# Configuración de la interfaz del CMS
+locale: "es"
 
 collections:
-  # ── Artículos ──────────────────────────────────────────────────────────────
+  # ── Artículos ───────────────────────────────────────────────────────────────
   - name: "articulos"
     label: "Artículos"
     label_singular: "Artículo"
     folder: "src/content/articulos"
     create: true
     delete: true
-    slug: "{{slug}}"     # nombre de archivo = slug del artículo
-    format: "json"       # guarda como .json (fácil de leer con import.meta.glob)
+    slug: "{{slug}}"
+    format: "json"
     summary: "{{title}} — {{createdAt}}"
     fields:
       - label: "Título"
         name: "title"
         widget: "string"
-        hint: "Título del artículo (aparece en la tarjeta y en la página)"
+        hint: "Aparece en la tarjeta y en la página del artículo"
 
       - label: "Resumen"
         name: "excerpt"
         widget: "text"
-        hint: "1–2 oraciones. Aparece en la tarjeta de la lista de artículos"
+        hint: "1–2 oraciones. Aparece en la tarjeta de la lista"
 
       - label: "Fecha de publicación"
         name: "createdAt"
         widget: "datetime"
         format: "YYYY-MM-DDTHH:mm:ssZ"
-        default: ""
 
       - label: "Imagen destacada"
         name: "imageUrl"
         widget: "image"
         required: false
-        hint: "Opcional. Aparece en la tarjeta y en la cabecera del artículo"
+        hint: "Opcional. URL o sube una imagen"
 
       - label: "Contenido"
         name: "content"
@@ -71,7 +75,7 @@ collections:
       - label: "ID de YouTube"
         name: "youtubeId"
         widget: "string"
-        hint: "Solo el ID, no la URL completa. Ej: dQw4w9WgXcQ (de ?v=dQw4w9WgXcQ)"
+        hint: "Solo el ID (11 caracteres). Ej: dQw4w9WgXcQ — de la URL ?v=dQw4w9WgXcQ"
         pattern:
           - '^[a-zA-Z0-9_-]{11}$'
           - "Debe ser exactamente el ID de YouTube (11 caracteres)"
@@ -80,4 +84,4 @@ collections:
         name: "description"
         widget: "text"
         required: false
-        hint: "Breve descripción del video (opcional)"
+        hint: "Descripción corta del video (opcional)"

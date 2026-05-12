@@ -1,16 +1,18 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App.tsx";
-import "./index.css";
+[build]
+  command = "npm run build"
+  publish = "dist"
 
-const root = document.getElementById("root");
-if (!root) throw new Error("No se encontró el elemento #root en el DOM.");
+[build.environment]
+  NODE_VERSION = "20"
 
-createRoot(root).render(
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StrictMode>
-);
+# Netlify Identity callback (needed for Decap CMS login)
+[[redirects]]
+  from   = "/api/auth"
+  to     = "/.netlify/identity/authorize"
+  status = 302
+
+# SPA fallback — goes LAST so static files (/admin/) take priority
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200

@@ -5,19 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Panel de Administración | IPBC</title>
     <!--
-      CORRECCIÓN: Con el enfoque CDN, Decap CMS se auto-inicializa al cargar
-      el script. NO se debe llamar a CMS.init() manualmente — eso causaba
-      la doble inicialización y el error "appendChild of null".
-
-      El script busca <body>, inyecta la UI, y lee config.yml automáticamente
-      desde /admin/config.yml. No se necesita ningún JS adicional.
+      Decap CMS cargado desde CDN.
+      Se auto-inicializa al cargar — NO llamar CMS.init() manualmente.
+      Lee la configuración desde /admin/config.yml automáticamente.
     -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   </head>
   <body>
-    <!--
-      Decap CMS inyecta toda la interfaz aquí.
-      Este archivo intencionalmente no tiene más contenido.
-    -->
+    <!-- Decap CMS inyecta toda la interfaz aquí -->
   </body>
 </html>
